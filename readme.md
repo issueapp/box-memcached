@@ -1,4 +1,9 @@
-This is a memcacheD with SASL setup based on http://www.shanison.com/2014/04/29/setup-memcached-with-sasl-authentication/
+Setup memcache server on Ubuntu 14.04 (LTS) with SASL based on http://www.shanison.com/2014/04/29/setup-memcached-with-sasl-authentication/.
+
+# Dependencies
+
+   [vagrant](http://vagrantup.com)
+   [ruby](https://www.ruby-lang.org)
 
 # Getting Started
 
