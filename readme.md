@@ -43,3 +43,7 @@ Setup memcache server on Ubuntu 14.04 (LTS) with SASL based on http://www.shanis
     55.94.13.192
     > exit
     $ MEMCACHE_URL=memcache://bam:bam@55.94.13.192 bin/test
+
+### Troubleshoot
+
+[add swap](https://www.digitalocean.com/community/tutorials/how-to-add-swap-on-ubuntu-14-04)
