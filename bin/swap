@@ -1,0 +1,29 @@
+#!/usr/bin/env sh
+#
+# usage: sudo bin/swap
+
+: ${SIZE:=1G}
+: ${SWAPFILE:=/swapfile}
+
+if swapon -s | grep -q $SWAPFILE
+then
+  echo Swap is already on...
+  exit
+fi
+
+fallocate -l $SIZE $SWAPFILE
+chmod 600 $SWAPFILE
+mkswap $SWAPFILE
+swapon $SWAPFILE
+
+if ! grep -q $SWAPFILE /etc/fstab
+then
+  cat << permanent_swap >> /etc/fstab
+$SWAPFILE   none    swap    sw    0   0
+permanent_swap
+fi
+
+if swapon -s | grep -q $SWAPFILE
+then
+  echo Swap is on...
+fi

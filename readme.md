@@ -47,3 +47,5 @@ Setup memcache server on Ubuntu 14.04 (LTS) with SASL based on http://www.shanis
 ### Troubleshoot
 
 [add swap](https://www.digitalocean.com/community/tutorials/how-to-add-swap-on-ubuntu-14-04)
+    $ ssh user@box
+    > curl -fsSL https://raw.githubusercontent.com/issueapp/box-memcached/master/bin/swap | SIZE=1G sudo -E sh
