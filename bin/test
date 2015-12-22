@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+#
+# usage: MEMCACHE_URL=memcache://abc:abc@10.11.12.13 bin/test
+
+require 'dalli'
+require 'uri'
+
+url = ENV['MEMCACHE_URL'] || 'memcache://bam:bam@10.11.12.112'
+uri = URI(url)
+
+options = { :namespace => "test", :compress => true, :username => uri.user, :password => uri.password }
+client = Dalli::Client.new(uri.host, options)
+
+client.set('abc', 123)
+if client.get('abc') == 123
+  puts "#{url} is up"
+end

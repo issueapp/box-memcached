@@ -1,0 +1,56 @@
+#!/usr/bin/env sh
+#
+# usage: sudo bin/setup
+
+
+: ${USR:=bam}
+: ${MEM:=512}  # 512 MB
+
+if [ ! -x /usr/local/bin/memcached ]
+then
+  apt-get update
+
+  apt-get install memcached
+  service memcached stop
+  rm -f /usr/bin/memcached
+
+  apt-get install autoconf
+  apt-get install libsasl2-2 sasl2-bin libsasl2-2 libsasl2-dev libsasl2-modules libevent-dev
+
+  curl http://www.memcached.org/files/{memcached-1.4.25.tar.gz} -Lo "#1"
+  tar xzvf memcached-1.4.25.tar.gz
+  mkdir -p memcached-1.4.25/build
+
+  cd memcached-1.4.25
+  ./autogen.sh
+
+  cd build
+  ../configure --enable-sasl  
+  make
+  make install
+fi
+
+echo Set SASL password for user: $USR
+saslpasswd2 -a memcached -c $USR
+chown memcache /etc/sasldb2
+
+#sasldblistusers2 -f /etc/sasldb2
+
+sed -i -e "s/^-m .\+$/-m $MEM/" -e "s/^-l/#-l/" /etc/memcached.conf
+if ! grep -q '\-S' /etc/memcached.conf
+then
+  echo Enabling SASL...
+  cat << enable_sasl >> /etc/memcached.conf
+
+# Enable SASL
+-S
+enable_sasl
+fi
+
+ln -svf /usr/local/bin/memcached /usr/bin/memcached
+service memcached restart
+
+#if lsof -i :11211 | grep -q "memcached.\+LISTEN"
+#then
+#  echo Memcached listening on 11211...
+#fi
