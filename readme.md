@@ -2,8 +2,8 @@ Setup memcache server on Ubuntu 14.04 (LTS) with SASL based on http://www.shanis
 
 # Dependencies
 
-   [vagrant](http://vagrantup.com)
-   [ruby](https://www.ruby-lang.org)
+   - [vagrant](http://vagrantup.com)
+   - [ruby](https://www.ruby-lang.org)
 
 # Getting Started
 
