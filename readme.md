@@ -35,3 +35,11 @@ Setup memcache server on Ubuntu 14.04 (LTS) with SASL based on http://www.shanis
 
     $ ssh user@box
     > curl -fsSL https://raw.githubusercontent.com/issueapp/box-memcached/master/bin/setup | USR=bam sudo -E sh
+    > sudo saslpasswd2 -a memcached -c bam
+    Password:
+    Again (for verification):
+    > sudo chown memcache /etc/sasldb2
+    > curl myipis.herokuapp.com
+    55.94.13.192
+    > exit
+    $ MEMCACHE_URL=memcache://bam:bam@55.94.13.192 bin/test
