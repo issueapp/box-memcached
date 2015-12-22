@@ -10,12 +10,12 @@ if [ ! -x /usr/local/bin/memcached ]
 then
   apt-get update
 
-  apt-get install memcached
+  apt-get install -y memcached
   service memcached stop
   rm -f /usr/bin/memcached
 
-  apt-get install autoconf
-  apt-get install libsasl2-2 sasl2-bin libsasl2-2 libsasl2-dev libsasl2-modules libevent-dev
+  apt-get install -y autoconf
+  apt-get install -y libsasl2-2 sasl2-bin libsasl2-2 libsasl2-dev libsasl2-modules libevent-dev
 
   curl http://www.memcached.org/files/{memcached-1.4.25.tar.gz} -Lo "#1"
   tar xzvf memcached-1.4.25.tar.gz

@@ -30,3 +30,8 @@ Setup memcache server on Ubuntu 14.04 (LTS) with SASL based on http://www.shanis
     > # Set SASL password for user: bam
     > exit
     $ MEMCACHE_URL=memcache://bam:bam@10.11.12.112 bin/test
+
+# Live
+
+    $ ssh user@box
+    > curl -fsSL https://raw.githubusercontent.com/issueapp/box-memcached/master/bin/setup | sudo sh
